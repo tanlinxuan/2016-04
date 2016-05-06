@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>郑老师的焦点图</title>
+    <script src="global/js/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <link href="global/css/initializeCSS.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript">
+        $(function(){
+            var opts={
+                Focuscont:'.focus-cont', //轮播图容器
+                Width:500, //定义轮播图宽度
+                Height:200 //高度
+            };
+            $(opts.Focuscont).css({  //设置主容器div的样式
+                'width':opts.Width+'px',
+                'height':opts.Height+'px',
+                'position':'relative',
+                'overflow':'hidden'
+            }).find('ul').css({     //设置图片列表ul样式
+                'width':opts.Width+'px',
+                'height':opts.Height+'px'
+            }).find('li').css({     //设置图片列表li样式
+                'width':opts.Width+'px',
+                'height':opts.Height+'px'
+            }).find('img').css({    //设置图片样式
+                'width':opts.Width+'px',
+                'height':opts.Height+'px'
+            });
+            $(opts.Focuscont).append(
+                    '<p class="btn-left"></p>' +// 左右控制键
+                    '<p class="btn-right"></p>' +
+                    '<div class="focus-bg"></div>' +//添加文字栏背景focus-bg
+                    '<div class="focus-code"></div>' + //焦点focus-code
+                    '<span class="focus-title"></span>');// 文字区域
+            $('.focus-bg').css({    //添加文字栏背景focus-bg样式
+                'width':opts.Width+'px',
+                'height':'35px',
+                'position':'absolute',
+                'bottom':'0px',
+                'background-color':'#000',
+                "opacity": .5
+            })
+            $('.btn-left').css({  // 左右控制键样式
+                'width':'30px',
+                'height':'30px',
+                'position':'absolute',
+                'left':'5px',
+                'top':'30%',
+                'display':'none',
+                'background':'#fff'
+            });
+            $('.btn-right').css({
+                'width':'30px',
+                'height':'30px',
+                'position':'absolute',
+                'right':'5px',
+                'top':'30%',
+                'display':'none',
+                'background':'#fff'
+            });
+            $('.focus-title').css({  //文字区域样式
+                'position':'absolute',
+                'left':'0px',
+                'bottom':'0px',
+                'height':'35px',
+                'display':'block',
+                'margin-left':'10px',
+                'color':'#fff',
+                'font-size':'20px',
+                'line-height':'35px'
+            });
+            $('.focus-code').css({  //焦点样式
+                //'width':'30px',
+                'height':'10px',
+                'position':'absolute',
+                'right':'5px',
+                'bottom':'10px'
+            });
+            var target=$(opts.Focuscont).find('li');  //缓存 图片列表 li
+            var i=0; //定义计数器
+            var intX;
+            for(k=0;k < target.length;k++){     //根据图片列表的长度target.length，循环输出焦点
+
+                $(opts.Focuscont).find('.focus-code').append('<a href="##" class="code"></a>')
+            }
+            var targetCode= $(opts.Focuscont).find('.focus-code').find('a');  //缓存焦点
+            var targetSpan= $(opts.Focuscont).find('.focus-title');  //缓存文本域
+            $('.focus-code').find('a').css({  //设置焦点样式
+                'width':'10px',
+                'height':'10px',
+                'background':'#fff',
+                'border-radius':'5px',
+                'display':'inline-block',
+                'margin-right':'5px'
+            });
+
+            function startX(){  // 定时器，每秒切换
+                intX= setInterval(func,1000);
+                function func(){
+                    target.css({'display':'none'});
+                    target.eq(i).css({'display':'block'});
+                    targetCode.css({'background':'#fff'});
+                    targetCode.eq(i).css({'background':'#6495ed'});
+                    targetSpan.text(target.eq(i).find('img').attr('alt'));
+                    i++;
+                    if(i >= target.length){
+                        i=0
+                    }
+                }
+            }
+            startX();
+            function stopX(){  //清除计时器
+                window.clearInterval(intX);
+            }
+            $(opts.Focuscont).mouseover(function(){  //鼠标悬浮时左右控制键显示，定时切换暂停
+                $('.btn-right').css({'display':'block'})
+                $('.btn-left').css({'display':'block'})
+                stopX();
+            }).mouseout(function(){         //鼠标离开时左右控制键隐藏，定时切换开始
+                $('.btn-right').css({'display':'none'})
+                $('.btn-left').css({'display':'none'})
+                startX();
+            })
+            $(opts.Focuscont).click(function(e){
+                e = e || window.event;
+                var targets = $(e.target || e.srcElement);
+                if (targets.hasClass('btn-right')) {    //点击右控制键图片向下一位切换
+                    i++;
+                    if(i >= target.length){
+                        i=0
+                    }
+                    target.css({'display':'none'});
+                    target.eq(i).css({'display':'block'});
+                    targetCode.css({'background':'#fff'});
+                    targetCode.eq(i).css({'background':'#6495ed'});
+                    targetSpan.text(target.eq(i).find('img').attr('alt'));
+                }
+                if (targets.hasClass('btn-left')) {  //点击左控制键图片向上一位切换
+                    i--;
+                    if(i >= 0){
+                        i=0
+                    }
+                    target.css({'display':'none'});
+                    target.eq(i).css({'display':'block'});
+                    targetCode.css({'background':'#fff'});
+                    targetCode.eq(i).css({'background':'#6495ed'});
+                    targetSpan.text(target.eq(i).find('img').attr('alt'));
+                }
+                if(targets.hasClass('code')){  //点击焦点时，切换对应的图片
+                    i=targets.index();
+                    target.css({'display':'none'});
+                    target.eq(i).css({'display':'block'});
+                    targetCode.css({'background':'#fff'});
+                    targetCode.eq(i).css({'background':'#6495ed'});
+                    targetSpan.text(target.eq(i).find('img').attr('alt'));
+                }
+            });
+        })
+    </script>
+</head>
+<body>
+    <div class="focus-cont">
+        <ul>
+            <li><img src="global/images/1.jpg" alt="我想要静静"></li>
+            <li><img src="global/images/2.jpg" alt="静静你好"></li>
+            <li><img src="global/images/3.jpg" alt="静静是谁"></li>
+            <li><img src="global/images/4.jpg" alt="11111111"></li>
+            <li><img src="global/images/5.jpg" alt="11111"></li>
+        </ul>
+    </div>
+</body>
+</html>

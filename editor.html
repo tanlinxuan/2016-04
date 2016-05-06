@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>应用编辑器</title>
+    <script src="global/js/jquery-2.1.1.min.js" type="text/javascript"></script>
+    <script src="global/js/jquery.bigcolorpicker.js" type="text/javascript"></script>
+    <script src="global/js/Drag.js" type="text/javascript"></script>
+    <link href="global/css/initializeCSS.css" rel="stylesheet" type="text/css">
+    <link href="global/css/editor.css" rel="stylesheet" type="text/css">
+    <link href="global/css/jquery.bigcolorpicker.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript">
+        $(function(){
+            //引用颜色选择器插件
+            $(".J-tool-color").bigColorpicker(function(el,color){
+                $("#J-tool-bg").css("backgroundColor",color);
+            });
+            $(document.body).click(function(e){
+                var e=e||window.event;
+                var target=$(e.target|| e.srcElement);
+                var FullScreenKey=1;
+                //设置编辑器背景颜色
+                if(target.hasClass('biglayout')){
+                    var bgcolor= $("#J-tool-bg").attr('style');
+                    $('.J-editor-canvas').attr('style',bgcolor);
+                }
+                if(target.hasClass('icon-full')){
+                    if(target.hasClass('onFullScreen')){
+                        $(".editor-wrapper").requestFullScreen().css({'width':'100%'});
+                        $('.icon-full').removeClass('onFullScreen').addClass('offFullScreen');
+                    }
+                   else  if(target.hasClass('offFullScreen')){
+                        $(".editor-wrapper").cancelFullScreen().css({'width':'80%'});
+                        $('.icon-full').removeClass('offFullScreen').addClass('onFullScreen');
+                    }
+                }
+            });
+            $(document).keyup(function(event){
+                switch(event.keyCode) {
+                    case 27:
+                        var target=$('.icon-full');
+                        if(target.hasClass('offFullScreen')){
+                            target.removeClass('offFullScreen').addClass('onFullScreen');
+                            $(".editor-wrapper").css({'width':'80%'});
+                        }
+                }
+            });
+            //引用拖拽插件
+            var dragEvent= new $.Drag({
+                moveTargetCont:"#editor-ul", //拖拽父级元素
+                moveTargetDestination:".editor-canvas-grid-show" //拖拽目标区域
+            });
+            dragEvent.bindEvent(".icon-text", function(){  //参数一为拖拽目标对象，参数二为function,拖拽完成后自定义事件
+                alert("插入文字");
+            });
+            dragEvent.bindEvent(".icon-lineChart", function(){  //参数一为拖拽目标对象，参数二为function,拖拽完成后自定义事件
+                alert('折线图');
+            });
+            dragEvent.bindEvent(".icon-barChart", function(){  //参数一为拖拽目标对象，参数二为function,拖拽完成后自定义事件
+                alert('柱状图');
+            });
+            dragEvent.bindEvent(".icon-gaugeChart", function(){  //参数一为拖拽目标对象，参数二为function,拖拽完成后自定义事件
+                alert('仪表盘');
+            });
+            dragEvent.bindEvent(".icon-mapChart", function(){  //参数一为拖拽目标对象，参数二为function,拖拽完成后自定义事件
+                alert('地图');
+            });
+            dragEvent.bindEvent(".icon-imageChart", function(){  //参数一为拖拽目标对象，参数二为function,拖拽完成后自定义事件
+                alert('图片');
+            });
+            dragEvent.bindEvent(".icon-switch", function(){  //参数一为拖拽目标对象，参数二为function,拖拽完成后自定义事件
+                alert('开关');
+            });
+            dragEvent.bindEvent(".icon-knob", function(){  //参数一为拖拽目标对象，参数二为function,拖拽完成后自定义事件
+                alert('旋钮');
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="editor-wrapper">
+    <div class="editor-head">
+        <div class="editor-tool-kit">
+            <span class="tool-item-color J-tool-color" title="颜色">
+                <em class="tool-item-color-border" id="J-tool-bg"></em>
+            </span>
+            <span class="tool-item-up" title="上一层"></span>
+            <span class="tool-item-down" title="下一层"></span>
+            <span class="tool-item-grid" title="对齐到网格"></span>
+            <span class="tool-item-del" title="删除"></span>
+        </div>
+        <div class="editor-tool-rect">
+            <label>
+                x:<input type="number" class="j_rect j_x">
+            </label>
+            <label>
+                y:<input type="number" class="j_rect j_y">
+            </label>
+            <label>
+                w:<input type="number" class="j_rect j_w">
+            </label>
+            <label>
+                h:<input type="number" class="j_rect j_h">
+            </label>
+        </div>
+        <div class="editor-tool-aside">
+            <span class="tool-item icon-full onFullScreen" title="全屏"></span>
+        </div>
+    </div>
+    <div class="editor-body">
+        <div class="editor-menu">
+            <ul id="editor-ul" style="position: relative;">
+                <li class="icon-text">文字</li>
+                <li class="icon-lineChart">曲线图</li>
+                <li class="icon-barChart">柱状图</li>
+                <li class="icon-gaugeChart">仪表盘</li>
+                <li class="icon-mapChart">地图</li>
+                <li class="icon-imageChart">图片</li>
+                <li class="icon-switch">开关</li>
+                <li class="icon-knob">旋钮</li>
+            </ul>
+        </div>
+        <div class="editor-canvas J-editor-canvas">
+            <ul class="editor-canvas-grid-left">
+                <li>0</li>
+                <li>100</li>
+                <li>200</li>
+                <li>300</li>
+                <li>400</li>
+                <li>500</li>
+                <li>600</li>
+                <li>700</li>
+            </ul>
+            <ul class="editor-canvas-grid-top">
+                <li>0</li>
+                <li>100</li>
+                <li>200</li>
+                <li>300</li>
+                <li>400</li>
+                <li>500</li>
+                <li>600</li>
+                <li>700</li>
+            </ul>
+            <div class="editor-canvas-grid-show"></div>
+        </div>
+        <div class="editor-tools">
+            <div>
+                <h4>页面属性</h4>
+                <label class="label-input">宽度<input type="number" size="8" class="j_page_width input-text" style="width: 45px;">px</label>
+                <hr><h4>高级设置</h4>
+                <label class="label-block">页面背景
+                    <a title="点击查看文档" href="http://www.w3school.com.cn/cssref/pr_background.asp" target="_blank">css样式</a>
+                    :<br><input title="body标签css的background属性，如填写#f00页面背景则为红色。此设置优先级高于通过工具栏设置的背景色" placeholder="#fff url(bg.jpg) 0 0 repeat-x" type="text" size="10" class="j_bg_css input-block">
+                </label>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

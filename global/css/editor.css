@@ -1,0 +1,271 @@
+@charset "utf-8";
+
+/**
+ *
+ * editor.css
+ *
+ * 应用编辑器样式文件
+ *
+ * version 1.0.0.0(主版本号.子版本号.编译版本号.修正版本号)
+ *
+ * @author tanlx
+ *
+ * create log 2016年4月21日09:17:14
+ *
+ * last update 无
+ *
+ * remark
+ *
+ */
+.editor-wrapper{
+    width:80%;
+    margin: 0px auto;
+
+}
+.editor-wrapper .editor-head{
+    background: #d3d3d3;
+    border-bottom: 1px solid #bbb;
+    padding: 0 15px 15px;
+    position: relative;
+}
+
+.editor-tool-kit,
+.editor-tool-rect,
+.editor-tool-aside{
+    display: inline-block;
+    vertical-align: middle;
+    background: #fff;
+    height: 16px;
+    margin-top: 15px;
+    padding: 8px 14px;
+    color: #666;
+    border-radius: 3px;
+    box-shadow: 0 2px 2px rgba(0,0,0,.3);
+    background-color: #f8f8f8;
+    background-image: -moz-linear-gradient(top,#fefefe,#efefef);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#fefefe),to(#efefef));
+    background-image: -webkit-linear-gradient(top,#fefefe,#efefef);
+    background-image: -o-linear-gradient(top,#fefefe,#efefef);
+    background-image: linear-gradient(to bottom,#fefefe,#efefef);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fffefefe', endColorstr='#ffefefef', GradientType=0);
+}
+.editor-tool-aside{
+    position: absolute;
+    right: 15px;
+    top:0px;
+}
+.editor-head .tool-item {
+    display: inline-block;
+    height: 16px;
+    line-height: 16px;
+    margin: 0 3px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.editor-head .editor-tool-kit span{
+    display: block;
+    float: left;
+    background: url("../images/icon-tool.png") scroll no-repeat;
+    background-size: 197px 30px;
+    margin-left: 15px;
+    cursor: pointer;
+}
+
+.editor-tool-kit span.tool-item-color{
+    width:31px;
+    height: 19px;
+    background-position: -14px -9px;
+}
+.editor-tool-kit span.tool-item-color .tool-item-color-border{
+    display: block;
+    width: 15px;
+    height: 4px;
+    background: #fff;
+    border: 1px solid #eee;
+    margin-top: 15px;
+
+
+}
+
+.editor-tool-kit span.tool-item-up{
+    width:15px;
+    height: 16px;
+    background-position: -60px -9px;
+}
+.editor-tool-kit span.tool-item-down{
+    width:15px;
+    height: 16px;
+    background-position: -93px -9px;
+}
+.editor-tool-kit span.tool-item-grid{
+    width:18px;
+    height: 15px;
+    background-position: -124px -9px;
+}
+.editor-tool-kit span.tool-item-del{
+    width:13px;
+    height: 15px;
+    background-position: -160px -9px;
+}
+
+.editor-tool-aside span.icon-full{
+    width: 30px;
+    height: 20px;
+    background: url("../images/icon-full.png") no-repeat;
+
+}
+
+.editor-head .editor-tool-rect input {
+    width: 50px;
+    padding-left: 4px;
+    color: #666;
+    border: 1px solid #888;
+}
+
+.editor-body{
+    width: 100%;
+    position: relative;
+}
+.editor-menu{
+    position: absolute;
+    left: 0;
+    top: 0;
+    border: 1px solid #dadada;
+    background: #e6e6e6;
+    padding: 20px;
+}
+.editor-menu li{
+    width: 48px;
+    padding-top: 56px;
+    margin-bottom: 10px;
+    background: url("../images/editor-icon.png") scroll no-repeat;;
+    height: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+.editor-menu li.icon-text{
+    background-position: 0 -61px;
+}
+.editor-menu li.icon-lineChart{
+    background-position: 0 -157px;
+}
+.editor-menu li.icon-barChart{
+    background-position: 0 -253px;
+}
+.editor-menu li.icon-gaugeChart{
+    background-position: 0 -349px;
+}
+.editor-menu li.icon-mapChart{
+    background-position: 0 -445px;
+}
+.editor-menu li.icon-imageChart{
+    background-position: 0 -541px;
+}
+.editor-menu li.icon-switch{
+    background-position: 0 -637px;
+}
+.editor-menu li.icon-knob{
+    background-position: 0 -737px;
+}
+.editor-canvas{
+
+    position: relative;
+    border: 1px solid #dadada;
+    height: 728px;
+    margin-left: 89px;
+    margin-right: 197px;
+    background: #fff;
+    overflow: auto;
+    background: url("../images/editor-body-bg.png") 0 0 no-repeat;
+}
+.editor-canvas .editor-canvas-grid-left {
+    width: 12px;
+    padding-right: 4px;
+    position: absolute;
+    top: 16px;
+    z-index: 1;
+}
+.editor-canvas .editor-canvas-grid-left li {
+    width: 16px;
+    height: 100px;
+    background: url("../images/editor-left-bg.png") 0 0 no-repeat;
+    float: left;
+    font-size: 12px;
+    color: #666;
+    writing-mode: tb-rl;
+    text-indent: 2px;
+
+}
+.editor-canvas .editor-canvas-grid-top {
+    height: 16px;
+    position: absolute;
+    left: 16px;
+    min-width: 800px;
+}
+.editor-canvas .editor-canvas-grid-top li {
+    height: 16px;
+    width: 100px;
+    background: url("../images/editor-top-bg.png") 0 0 no-repeat;
+    float: left;
+    text-align: left;
+    font-size: 12px;
+    color: #666;
+    text-indent: 2px;
+}
+.editor-canvas .editor-canvas-grid-show{
+    width: 100%;
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    bottom: 0px;
+    background: url("../images/editor-body-bg.png");
+    background-size:10px;
+}
+
+.editor-tools {
+    color: #333;
+    padding: 20px 16px;
+    border: 1px solid #dadada;
+    font-size: 14px;
+    word-spacing: 1px;
+    width: 163px;
+    height: 688px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: #eee;
+    overflow: auto;
+}
+.editor-tools h4 {
+    font-size: 16px;
+    color: #333;
+    border-left: 2px solid #333;
+    padding-left: 5px;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+.editor-tools .label-input {
+    border: 1px solid #ccc;
+    height: 32px;
+    line-height: 32px;
+    display: block;
+    margin-bottom: 15px;
+    padding: 0 5px;
+}
+.editor-tools .label-input input {
+    border: 1px solid #ccc;
+    background: #fff;
+    width: 32px;
+    height: 32px;
+    display: inline-block;
+    position: relative;
+    top: -1px;
+    margin: 0 4px;
+    outline: 0;
+}
+.editor-tools .label-block {
+    display: block;
+    line-height: 30px;
+    margin: 10px 0;
+}
