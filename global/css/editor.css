@@ -98,21 +98,36 @@
     height: 16px;
     background-position: -93px -9px;
 }
-.editor-tool-kit span.tool-item-grid{
-    width:18px;
-    height: 15px;
+.editor-tool-kit span.tool-item-grid.on{
+    width:17px;
+    height: 13px;
     background-position: -124px -9px;
 }
+
+.editor-tool-kit span.tool-item-grid.off{
+    width:17px;
+    height: 13px;
+    background: url("../images/icon-bg2.jpg") scroll no-repeat;
+    background-size: 17px 13px;
+
+}
+
 .editor-tool-kit span.tool-item-del{
     width:13px;
     height: 15px;
     background-position: -160px -9px;
 }
 
-.editor-tool-aside span.icon-full{
+.editor-tool-aside span.icon-full.onFullScreen{
     width: 30px;
     height: 20px;
     background: url("../images/icon-full.png") no-repeat;
+
+}
+.editor-tool-aside span.icon-full.offFullScreen{
+    width: 30px;
+    height: 20px;
+    background: url("../images/icon-full2.jpg") no-repeat;
 
 }
 
@@ -219,6 +234,9 @@
     left: 16px;
     top: 16px;
     bottom: 0px;
+
+}
+.editor-canvas .editor-canvas-grid-show.bg{
     background: url("../images/editor-body-bg.png");
     background-size:10px;
 }
